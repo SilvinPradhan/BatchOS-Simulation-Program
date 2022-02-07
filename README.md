@@ -13,8 +13,8 @@ CMPS 431 Operating Systems
       ```v.	Etc. ```<br/>
       [b.]	The programs will reside in a directory called /jobs.<br/>
       [c.]	The BatchMonitor program will live in a different directory than the jobs directory.  See below.<br/>
-      i.	C:\users\batch<br/>
-      ii.	C:\users\batch\jobs<br/>
+      ```i.	C:\users\batch```<br/>
+      ```ii.	C:\users\batch\jobs```<br/>
       [d.]	The Batch Monitor program will give the user the following options<br/>
       ```i.	List jobs```<br/>
       ```ii.	Set jobs directory```<br/>
