@@ -7,6 +7,42 @@
 #include <dirent.h>
 #include <string.h>
 
+void runAll(char *path) {
+    DIR *d;
+    struct dirent *dir;
+    d = opendir(path);
+    if (d) {
+        while ((dir = readdir(d)) != NULL) {
+            char *file = dir->d_name;
+            char *e;
+            int index;
+            e = strchr(file, '.');
+            index = (int) (e - file);
+            int len = strlen(file);
+            int pos = len - index;
+            if (pos == 2 && strstr(file, ".c") != NULL) {
+                printf("Running JOB : %s\n", file);
+                char run[50];
+                char out[50];
+
+                strcpy(run, "gcc -o");
+                strcat(run, path);
+                strcat(run, file);
+                strcat(run, ".out");
+                strcat(run, path);
+                strcat(run, file);
+                system(run);
+
+                strcpy(out, path);
+                strcat(out, file);
+                strcat(out, ".out");
+                system(run);
+                system(out);
+            }
+        }
+    }
+}
+
 void displayJobs(char *path) {
     DIR *d;
     struct dirent *dir;
@@ -64,14 +100,19 @@ int main() {
             printf("Job output: \n");
             system(out);
             printf("Job done!!\n\n");
+        } else if (option == 4) {
+            printf("Listing program options ....\n");
         } else if (option == 5) {
             printf("It's hard to say goodbye. Thank you for using this OS.\n");
             option = 0;
-        } else if (option == 7) {
+        } else if (option == 6) {
             printf("\t\t\t------- Help -------\n");
             printf("Welcome to the console program that can compile and execute programs either by: \n "
                    "the user entering the name of the program,\n or automatically executing all of the programs in a directory.\n "
                    "The program will essentially simulate the system monitor of a Batch system.\n");
+        } else if (option == 7) {
+            printf("\t\t\t<-------Performing all jobs------->\n");
+            runAll(path);
         } else {
             printf("Please select from option 1 - 7.\n");
         }
